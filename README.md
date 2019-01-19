@@ -1,2 +1,0 @@
-# GoogleBooks
-GoogleBooks React HW
