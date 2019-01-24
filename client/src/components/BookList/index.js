@@ -1,7 +1,8 @@
 import React from "react";
 import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
-
+import DeleteBtn from "../DeleteBtn";
+import SaveBtn from "../SaveBtn";
 // Exporting both BookList and BookListItem from this file
 
 // BookList renders a bootstrap list item
@@ -26,9 +27,10 @@ export function BookListItem({
           <Col size="xs-8 sm-9">
             <h3>{title}</h3>
             <p>Description: {description}</p>
-            <a rel="noreferrer noopener" target="_blank" href={link}>
-              Go to Book!
-            </a>
+            <button><a rel="noreferrer noopener" target="_blank" href={link}>
+              View
+            </a></button>
+            <SaveBtn/>
           </Col>
         </Row>
       </Container>

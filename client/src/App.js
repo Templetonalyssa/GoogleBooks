@@ -6,11 +6,32 @@ import Button from "./components/Button";
 import API from "./utils/API";
 import { BookList, BookListItem } from "./components/BookList";
 import { Container, Row, Col } from "./components/Grid";
+import SavedPage from "./components/SavedPage";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 
 class App extends Component {
   state = {
     books: [],
     bookSearch: ""
+  };
+
+  componentDidMount() {
+    this.loadBooks();
+  }
+
+  loadBooks = () => {
+    API.getBooks()
+      .then(res =>
+        this.setState({ books: res.data, bookSearch: "" })
+      )
+      .catch(err => console.log(err));
+  };
+
+  deleteBook = id => {
+    API.deleteBook(id)
+      .then(res => this.loadBooks())
+      .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
@@ -35,6 +56,11 @@ class App extends Component {
     return (
       <div>
         <Nav />
+        <Router>
+          <div>
+        <Route exact path="/about" component={SavedPage} />
+        </div>
+        </Router>
         <Jumbotron />
         <Container>
           <Row>
@@ -82,6 +108,7 @@ class App extends Component {
                       />
                     );
                   })}
+                
                 </BookList>
               )}
             </Col>
